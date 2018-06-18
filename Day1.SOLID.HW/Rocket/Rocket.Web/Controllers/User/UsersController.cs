@@ -24,13 +24,15 @@ namespace Rocket.Web.Controllers.User
         private readonly RocketUserManager _rocketUserManagerService;
         private readonly RockeRoleManager _rolemanager;
         private readonly IUserManagementService _userManagementService;
+        private readonly IGeneratorConfirmationLink _generatorConfirmationLink;
 
         public UsersController(
-            RocketUserManager rocketUserManagerService, RockeRoleManager rolemanager, IUserManagementService userNativeManagementService)
+            RocketUserManager rocketUserManagerService, RockeRoleManager rolemanager, IUserManagementService userNativeManagementService, IGeneratorConfirmationLink generatorConfirmationLink)
         {
             _rocketUserManagerService = rocketUserManagerService;
             _rolemanager = rolemanager;
             _userManagementService = userNativeManagementService;
+            _generatorConfirmationLink = generatorConfirmationLink;
         }
 
         /// <summary>

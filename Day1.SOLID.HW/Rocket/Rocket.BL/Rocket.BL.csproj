@@ -144,6 +144,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\ReleaseList\MusicDetailedInfoService.cs" />
     <Compile Include="Services\PersonalArea\PersonalDataService.cs" />
+    <Compile Include="Services\User\GeneratorConfirmationLinkService.cs" />
     <Compile Include="Services\User\UserAccountLevelService.cs" />
     <Compile Include="Services\User\UserAccountStatusService.cs" />
     <Compile Include="Services\InfoLogService.cs" />

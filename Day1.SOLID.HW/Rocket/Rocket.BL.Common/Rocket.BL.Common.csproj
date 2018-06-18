@@ -165,6 +165,7 @@
     <Compile Include="Services\ReleaseList\ISubscriptionService.cs" />
     <Compile Include="Services\ReleaseList\ITvSeriesDetailedInfoService.cs" />
     <Compile Include="Services\UserPayment\IUserPaymentService.cs" />
+    <Compile Include="Services\User\IGeneratorConfirmationLink.cs" />
     <Compile Include="Services\User\IUserAccountLevelService.cs" />
     <Compile Include="Services\User\IUserAccountStatusService.cs" />
     <Compile Include="Services\User\IUserManagementService.cs" />
