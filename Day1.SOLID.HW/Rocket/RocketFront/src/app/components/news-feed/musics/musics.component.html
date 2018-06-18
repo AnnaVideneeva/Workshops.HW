@@ -1,0 +1,27 @@
+<!--Music-->
+<div class="row">
+  <div class="col-sm-6 col-xl-4 mb-4" *ngFor="let music of musicPage?.PageItems">
+    <div class="card box-shadow h-100">
+      <div class="position-relative">
+        <img class="card-img-top" src="{{music.PosterImageUrl}}">
+        <div class="position-absolute poster-info w-100 px-3">
+          <div class="float-right">{{music.ReleaseDate | date:'dd.MM.yyyy'}}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4 class="mb-0">
+        <span *ngFor="let musicians of music.Musicians, let last=last">{{musicians.FullName}}{{last ? '' : ', '}}</span>
+      </h4>
+        <h5 class="mb-0 mt-2">{{music.Title}}</h5>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <button type="button" class="btn btn-outline-secondary" [routerLink]="['/music', music.Id]">Альбом</button>
+          <div class="btn-group">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Music end-->
+<hr>
+<app-paging [pageCount]="musicPage?.TotalPagesCount"></app-paging>

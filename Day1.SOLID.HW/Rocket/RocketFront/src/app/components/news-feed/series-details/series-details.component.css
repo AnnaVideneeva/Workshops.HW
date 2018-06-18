@@ -1,0 +1,9 @@
+.poster-info {
+  top: 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-link:hover .material-icons.md-dark {
+    color: rgb(0, 0, 0);
+  }

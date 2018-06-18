@@ -1,0 +1,3 @@
+a {color: rgb(120, 120, 120);}
+a:hover {color: rgb(0, 0, 0);}
+.active a {color: rgb(0, 0, 0);}

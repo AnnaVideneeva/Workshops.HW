@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{80692A9E-FD37-4473-9E91-FE1D345EE27A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rocket.BL.Common</RootNamespace>
+    <AssemblyName>Rocket.BL.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\BillingType.cs" />
+    <Compile Include="DtoModels\ReleaseList\EpisodeFullDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\EpisodeDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\EpisodeMinimalDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\GenreDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\PersonMinimalDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\SeasonDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\TvSeriesDetailsDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\TvSeriesFullDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\TvSeriesMinimalDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\TvSeriesPersonsDto.cs" />
+    <Compile Include="DtoModels\ReleaseList\TvSeriesSeasonsDto.cs" />
+    <Compile Include="Mappings\Notification\BillingMessageMappingProfile.cs" />
+    <Compile Include="Mappings\Notification\MusicNotificationMappingProfile.cs" />
+    <Compile Include="Mappings\Notification\EpisodeNotificationMappingProfile.cs" />
+    <Compile Include="Mappings\PersonalAreaMappings\EmailMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\BaseReleaseMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\CategoryMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\GenreMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\PersonTypeMappingProfile.cs" />
+    <Compile Include="Mappings\Subscription\SubscribableMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\AccountLevelMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\AccountStatusMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\AddressMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\EmailAddressMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\GenderMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\PhoneNumberMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\HowToCallMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\LanguageMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\UserDetailMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\UserMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\UserRoleMappingProfile\PermissionMappingProfile.cs" />
+    <Compile Include="Mappings\UserMappingProfile\UserRoleMappingProfile\RoleMappingProfile.cs" />
+    <Compile Include="Mappings\UserPayment\UserPaymentMappingProfile.cs" />
+    <Compile Include="Models\Notification\BillingNotification.cs" />
+    <Compile Include="Models\Notification\ConfirmationNotification.cs" />
+    <Compile Include="Models\Notification\CustomNotification.cs" />
+    <Compile Include="Models\Notification\FilmForNotification.cs" />
+    <Compile Include="Models\Notification\MessageAboutFilm.cs" />
+    <Compile Include="Models\Notification\MusicNotification.cs" />
+    <Compile Include="Models\Notification\Receiver.cs" />
+    <Compile Include="Models\Notification\EpisodeNotification.cs" />
+    <Compile Include="Models\Pagination\MusicPageInfo.cs" />
+    <Compile Include="Models\Pagination\PageInfo.cs" />
+    <Compile Include="Models\Pagination\ReleasesPageInfo.cs" />
+    <Compile Include="Models\Pagination\TvSeriesPageInfo.cs" />
+    <Compile Include="Models\PersonalArea\Email.cs" />
+    <Compile Include="Models\PersonalArea\MusicGenre.cs" />
+    <Compile Include="Models\ReleaseList\BaseRelease.cs" />
+    <Compile Include="Models\ReleaseList\Category.cs" />
+    <Compile Include="Models\ReleaseList\PersonType.cs" />
+    <Compile Include="Models\Subscription\Subscribable.cs" />
+    <Compile Include="Models\UserPayment\UserPayment.cs" />
+    <Compile Include="Models\User\AccountLevel.cs" />
+    <Compile Include="Models\User\EmailAddress.cs" />
+    <Compile Include="Models\User\Gender.cs" />
+    <Compile Include="Models\User\PhoneNumber.cs" />
+    <Compile Include="Models\User\AccountStatus.cs" />
+    <Compile Include="Models\User\Address.cs" />
+    <Compile Include="Models\User\HowToCall.cs" />
+    <Compile Include="Models\User\Language.cs" />
+    <Compile Include="Models\User\User.cs" />
+    <Compile Include="Models\User\UserDetail.cs" />
+    <Compile Include="Mappings\ReleaseList\CountryMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\EpisodeMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\FilmMappingProfile.cs" />
+    <Compile Include="Mappings\PersonalAreaMappings\UserProfileMapping.cs" />
+    <Compile Include="Mappings\ReleaseList\PersonMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\SeasonMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\TVSeriesMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\MusicMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\MusicTrackMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\MusicGenreMappingProfile.cs" />
+    <Compile Include="Mappings\ReleaseList\MusicianMappingProfile.cs" />
+    <Compile Include="Services\ILogService.cs" />
+    <Compile Include="Services\Notification\IMailNotificationService.cs" />
+    <Compile Include="Services\IRoleService.cs" />
+    <Compile Include="Services\IUserRoleManager.cs" />
+    <Compile Include="Services\PersonalArea\IEmailManager.cs" />
+    <Compile Include="Services\PersonalArea\IGenreManager.cs" />
+    <Compile Include="Services\PersonalArea\IPersonalData.cs" />
+    <Compile Include="Models\PersonalArea\Category.cs" />
+    <Compile Include="Models\PersonalArea\Genre.cs" />
+    <Compile Include="Models\ReleaseList\Country.cs" />
+    <Compile Include="Models\ReleaseList\Episode.cs" />
+    <Compile Include="Models\ReleaseList\Film.cs" />
+    <Compile Include="Models\ReleaseList\Music.cs" />
+    <Compile Include="Models\ReleaseList\MusicGenre.cs" />
+    <Compile Include="Models\ReleaseList\Musician.cs" />
+    <Compile Include="Models\ReleaseList\Person.cs" />
+    <Compile Include="Models\ReleaseList\Season.cs" />
+    <Compile Include="Models\ReleaseList\MusicTrack.cs" />
+    <Compile Include="Models\ReleaseList\TVSeries.cs" />
+    <Compile Include="Models\ReleaseList\Genre.cs" />
+    <Compile Include="Models\PersonalArea\UserProfile.cs" />
+    <Compile Include="Models\UserRoles\Permission.cs" />
+    <Compile Include="Models\UserRoles\Role.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IPermissionService.cs" />
+    <Compile Include="Services\ReleaseList\IEpisodeService.cs" />
+    <Compile Include="Services\ReleaseList\IGenreService.cs" />
+    <Compile Include="Services\ReleaseList\ISubscriptionService.cs" />
+    <Compile Include="Services\ReleaseList\ITvSeriesDetailedInfoService.cs" />
+    <Compile Include="Services\UserPayment\IUserPaymentService.cs" />
+    <Compile Include="Services\User\IUserAccountLevelService.cs" />
+    <Compile Include="Services\User\IUserAccountStatusService.cs" />
+    <Compile Include="Services\User\IUserManagementService.cs" />
+    <Compile Include="Services\User\IUserValidatateService.cs" />
+    <Compile Include="Services\ReleaseList\IFilmDetailedInfoService.cs" />
+    <Compile Include="Services\ReleaseList\IGuestReleaseListService.cs" />
+    <Compile Include="Services\ReleaseList\IMusicDetailedInfoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rocket.DAL.Common\Rocket.DAL.Common.csproj">
+      <Project>{4383c0ff-4c4a-4c42-bb46-5a5137e5e7ad}</Project>
+      <Name>Rocket.DAL.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\StyleCop.MSBuild.5.0.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.5.0.0\build\StyleCop.MSBuild.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.5.0.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.5.0.0\build\StyleCop.MSBuild.targets'))" />
+  </Target>
+</Project>

@@ -1,0 +1,26 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<div class="signup-form">
+    <form method="post">
+		<h2>Register</h2>
+		<p class="hint-text">Hi! Create your account. <br>It's free and only takes a minute.</p>
+        <div class="form-group">
+            <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required" [(ngModel)]="User.FirstName">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required" [(ngModel)]="User.LastName">
+            </div>
+        <div class="form-group">
+        	<input type="email" class="form-control" name="email" placeholder="Email" required="required" [(ngModel)]="User.Login">
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required" [(ngModel)]="User.Password">
+        </div>
+        <div class="form-group">
+			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group">
+            <button class="btn btn-success btn-lg btn-block" (click)="register()">Register Now</button>
+        </div>
+    </form>
+	<div class="text-center">Already have an account?  <a routerLink="/login" class="text-primary">Войти</a></div>
+</div>

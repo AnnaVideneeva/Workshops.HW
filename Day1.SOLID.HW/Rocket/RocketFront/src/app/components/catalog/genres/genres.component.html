@@ -1,0 +1,10 @@
+<div class="btn-toolbar mb-2 mb-md-0" *ngIf="genres">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+    aria-expanded="false" data-boundary="">
+    {{selectedGenre ? selectedGenre.Name : 'Все жанры'}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="overflow-y: scroll; height: 300px">
+    <a class="dropdown-item" *ngIf="selectedGenre" [routerLink]="[]" [queryParams]="{ page: 1 }">Все</a>
+    <a class="dropdown-item" *ngFor="let genre of genres" [routerLink]="[]" [queryParams]="{ genre: genre.Id, page: 1 }">{{genre.Name}}</a>
+  </div>
+</div>

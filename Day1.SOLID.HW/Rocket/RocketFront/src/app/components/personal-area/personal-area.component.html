@@ -1,0 +1,114 @@
+<body class="bg-light">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="card" style="width:20rem;margin:20px 0 24px 0">
+                  <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar3.png" alt="image" style="width:100%">
+                  <div class="card-body">
+                    <h4 class="card-title">{{data.FirstName}} {{data.LastName}}</h4>
+                  </div>
+              </div>              
+          </div>
+          <div class="col">
+              <label for="firstName">Имя </label>
+              <input type="text" [(ngModel)]="data.FirstName" class="form-control" id="firstName" placeholder="" 
+              #name="ngModel" required pattern="[а-яА-Я]{3,15}">
+              <div [hidden]="name.valid" class="alert alert-danger">
+                Имя должно содержать от 3 до 15 букв русского алфавита.
+              </div>
+              <label for="lastName">Фамилия</label>
+              <input type="text" [(ngModel)]="data.LastName" class="form-control" id="lastName" placeholder="" 
+              #lastname="ngModel" required pattern="[а-яА-Я]{3,15}">
+              <div [hidden]="lastname.valid" class="alert alert-danger">
+                Фамилия должна содержать от 3 до 15 букв русского алфавита.
+              </div>
+              <button [disabled]="name.invalid || lastname.invalid" class="btn btn-success btn btn-block" (click)="changeUserInfo()" 
+              type="submit">Изменить персональные данные</button>
+              <br>
+              <label for="password">Новый пароль</label>
+              <input type="password" class="form-control" id="password" placeholder="6 и более символов" [(ngModel)]="newPassword" #password="ngModel"
+              required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$">
+              <input type="password" class="form-control" id="passwordConfirm" placeholder="Подтверждение пароля" [(ngModel)]="confirmNewPassword" #passwordConfirm="ngModel"
+              required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$">
+              <br>
+              <button [disabled]="password.invalid || passwordConfirm.invalid || newPassword != confirmNewPassword" class="btn btn-success btn btn-block" 
+              (click)="changeUserPassword(newPassword,confirmNewPassword)" type="submit">Изменить пароль</button>
+              <br> 
+              <label for="email">Emails</label>
+              <div *ngFor="let emails of data.Emails">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                          <td style="width: 60%"><input type="email" class="form-control" id="{{emails.Id}}" placeholder="you@example.com" value="{{emails.Name}}" disabled></td>
+                          <td style="width: 40%"><button class="btn btn-secondary btn btn-block" (click)="deleteEmail(emails.Id,emails.Name)" type="submit">Удалить Email</button></td>            
+                        </tr>
+                    </tbody>    
+                </table>
+              </div>
+              <div>
+                <table class="table">
+                  <tbody>
+                      <tr>
+                        <td style="width: 60%"><input type="email" class="form-control" id="email" 
+                          placeholder="Enter your e-mail"[(ngModel)]="newEmail" #Email="ngModel" required pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"></td>
+                        <td style="width: 40%"><button [disabled]="Email.invalid" class="btn btn-success btn btn-block" (click)="addEmail(newEmail)">Добавить Email</button></td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>       
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+              <br>                 
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col">
+                <label for="category">Музыкальные жанры</label>
+                <select class="custom-select d-block w-100" [(ngModel)]="selectedGenreMusic">
+                <option *ngFor="let r of listGenreMusicForFront" [value]="r.Name">{{r.Name}}</option>
+                </select>
+                <br>
+                  <button class="btn btn-success btn btn-block" type="submit" (click)="addGenreMusic(selectedGenreMusic)">Добавить музыкальный жанр</button>
+                <div class="invalid-feedback">
+                  Please select a valid category.
+                </div>
+                <label for="genre">ТВ жанры</label>
+                <select class="custom-select d-block w-100" [(ngModel)]="selectedGenreTv" >
+                  <option *ngFor="let r of listGenreTvForFront" [value]="r.Name">{{r.Name}}</option>
+                  </select>
+                
+                <div class="invalid-feedback">
+                  Please provide a valid genre.
+                </div>
+                  <br>
+                  <button class="btn btn-success btn btn-block" type="submit" (click)="addGenreTv(selectedGenreTv)">Добавить ТВ жанр</button>
+            </div>
+          </div>         
+            <div class="row">
+                <div class="col" style="width:20rem;margin:20px 0 24px 0">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Категория</th>
+                        <th>Жанр</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let gen of dataGenreMusicForFront,let rowIndex = index">
+                        <td>Музыка</td>
+                        <td>{{gen}}</td>
+                        <td><input type="button" value="Удалить" (click)="deleteMusicGenre(gen,index)" class="btn btn-secondary" /></td>
+                    </tr> 
+                    <tr *ngFor="let gen of dataGenreTvForFront,let rowIndex = index">
+                      <td>ТВ</td>
+                      <td>{{gen}}</td>
+                      <td><input type="button" value="Удалить" (click)="deleteTvGenre(gen,index)" class="btn btn-secondary" /></td>
+                  </tr> 
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+          </body>

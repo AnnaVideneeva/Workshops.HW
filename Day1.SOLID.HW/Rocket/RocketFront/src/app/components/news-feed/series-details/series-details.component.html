@@ -1,0 +1,97 @@
+<div class="container-fluid" *ngIf="series">
+  <div class="row">
+    <div class="col-12 col-lg-4 col-md-3">
+      <div class="position-relative">
+        <img src="{{series.Seasons[0].PosterImageUrl}}" class="w-100 d-md-block" [class.d-none]="series.PosterImageUrl" alt="">
+        <img src="{{series.PosterImageUrl}}" class="w-100" [class.d-md-none]="series.Seasons[0].PosterImageUrl" alt="">
+        <div class="position-absolute poster-info w-100 px-3">
+          <div class="float-left">Рейтинг: {{series.LostfilmRate}}</div>
+          <div class="float-right">Год выхода: {{series.TvSerialYearStart}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <h1>{{series.TitleRu}}</h1>
+        </div>
+        <div class="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-link p-0 mr-3 mr-sm-2" href="#">
+              <i class="material-icons md-36 md-dark">star_border</i>
+            </button>
+            <a class="btn btn-link p-0">
+              <i class="material-icons md-36 md-dark">notifications_none</i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <span class="text-muted">{{series.TitleEn}}</span>
+      <div class="row">
+        <div class="col">
+          <span>Статус: {{series.CurrentStatus}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <span>Канал: {{series.TvSerialCanal}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <span>Рейтинг IMDb: {{series.RateImDb}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Жанр:
+          <span *ngFor="let genre of series.Genres, let last=last">{{genre.Name}}{{last ? '' : ', '}}</span>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <ng-container *ngFor="let season of series.Seasons, let lasts = last">
+            <ng-container *ngFor="let episode of season.ListEpisode, let laste = last">
+              <div class="row align-items-center my-2">
+                <div class="col-auto">
+                  <a class="btn btn-link p-0" target="_blank" href="{{episode.UrlForEpisodeSource}}">
+                    <i class="material-icons md-36 md-dark align-middle">remove_red_eye</i>
+                  </a>
+                </div>
+                <div class="col">{{episode.SeasonNumber}} сезон {{episode.Number}} серия</div>
+                <div class="col" style="line-height: 100%;">
+                  {{episode.TitleRu}}
+                  <br/>
+                  <span class="small text-muted">{{episode.TitleEn}}</span>
+                </div>
+                <div class="col" style="line-height: 100%;">
+                  {{episode.ReleaseDateRu | date:'dd.MM.yyyy'}}
+                  <br/>
+                  <span class="small text-muted">{{episode.ReleaseDateEn | date:'dd.MM.yyyy'}}</span>
+                </div>
+              </div>
+              <hr *ngIf="!laste || !lasts">
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">{{series.Summary}}</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row align-items-center my-2" *ngFor="let person of series.Persons">
+            <div class="col-auto">
+              <img src="{{person.PhotoThumbnailUrl}}" alt="">
+            </div>
+            <div class="col-3" style="line-height: 100%;">
+              {{person.FullNameRu}}
+              <br/>
+              <span class="small text-muted">{{person.FullNameEn}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

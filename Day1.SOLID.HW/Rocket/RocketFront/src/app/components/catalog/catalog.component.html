@@ -1,0 +1,31 @@
+<div class="container-fluid text-center">
+  <!--Head-->
+  <div class="col-md-8 m-auto">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1>Каталог</h1>
+      <!--Genres-->
+      <app-genres></app-genres>
+      <!--Genres end-->
+    </div>
+  </div>
+  <!--Head end-->
+  <!--Main-->
+  <div class="row content">
+    <!--Left side menu-->
+    <div class="col-md-2 pr-md-0 sidenav text-left">
+      <app-side-menu></app-side-menu>
+    </div>
+    <!--Left side menu end-->
+    <!--Content-->
+    <div class="col-md-8 text-left">
+      <router-outlet></router-outlet>
+    </div>
+    <!--Content end-->
+    <!--Right side adv-->
+    <div class="col-md-2 sidenav">
+      <app-advertisement></app-advertisement>
+    </div>
+    <!--Right side adv end-->
+  </div>
+  <!--Main end-->
+</div>
