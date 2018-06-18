@@ -369,6 +369,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\LoggerController.cs" />
+    <Compile Include="Controllers\PersonalArea\MusicGenresController.cs" />
+    <Compile Include="Controllers\PersonalArea\TVGenresController.cs" />
     <Compile Include="Controllers\ReleaseList\GenreController.cs" />
     <Compile Include="Controllers\ReleaseList\SubscriptionController.cs" />
     <Compile Include="Controllers\UserPayments\IPNController.cs" />
@@ -381,7 +383,6 @@
     <Compile Include="ConfigHandlers\SettingsManager.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PersonalArea\EmailController.cs" />
-    <Compile Include="Controllers\PersonalArea\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReleaseList\EpisodeController.cs" />
     <Compile Include="Controllers\UserRole\PermissionController.cs" />
