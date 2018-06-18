@@ -14,6 +14,7 @@ using Rocket.BL.Services.PersonalArea;
 using Rocket.BL.Services.ReleaseList;
 using Rocket.BL.Services.User;
 using Rocket.BL.Services.UserPaymentService;
+using Rocket.BL.Services.UserServices;
 using Rocket.BL.Validators.User;
 using System.Collections.Generic;
 
@@ -28,7 +29,7 @@ namespace Rocket.BL
             Bind<IEpisodeService>().To<EpisodeService>();
             Bind<IPersonalData>().To<PersonalDataService>();
             Bind<IValidator<Common.Models.User.User>>().To<UserValidatorCheckRequiredFields>();
-            Bind<IEmailManager>().To<ChangeEmailManagerService>();
+            Bind<IEmailManager>().To<EmailManagerService>();
             Bind<IUserPaymentService>().To<UserPaymentService>();
 
             Bind<IUserAccountLevelService>().To<UserAccountLevelService>();
@@ -52,6 +53,8 @@ namespace Rocket.BL
             Bind<ISubscriptionService>().To<SubscriptionService>();
             Bind<IMailTransport>().To<SmtpClient>();
             Bind<ILogService>().To<InfoLogService>();
+            Bind<IRoleService>().To<RoleService>();
+            Bind<IUserRoleManager>().To<UserRoleManager>();
         }
     }
 }

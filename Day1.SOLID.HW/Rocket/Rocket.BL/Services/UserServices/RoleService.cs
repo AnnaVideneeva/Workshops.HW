@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common.Logging;
 using Microsoft.AspNet.Identity;
 using Rocket.BL.Common.Models.UserRoles;
+using Rocket.BL.Common.Services;
 using Rocket.DAL.Common.DbModels.Identity;
 using Rocket.DAL.Common.UoW;
 using Rocket.DAL.Identity;
 
 namespace Rocket.BL.Services.UserServices
 {
-    public class RoleService : BaseService
+    public class RoleService : BaseService, IRoleService
     {
         private readonly ILog _logger;
         private readonly RockeRoleManager _roleManager;
@@ -35,7 +37,10 @@ namespace Rocket.BL.Services.UserServices
             //    .Any();
         }
 
-        public IEnumerable<Role> GetAllRoles()
+        public IEnumerable<Role> GetAll(
+            Expression<Func<DbRole, bool>> filter = null,
+            Func<IQueryable<DbRole>, IOrderedQueryable<DbRole>> orderBy = null,
+            string includeProperties = "")
         {
             _logger.Trace($"Request GetAllRoles");
             return _roleManager.Roles.Include(t => t.Permissions).ToArray().Select(Mapper.Map<Role>);

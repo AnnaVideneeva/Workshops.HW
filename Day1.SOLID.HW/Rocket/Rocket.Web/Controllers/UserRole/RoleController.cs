@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Rocket.BL.Common.Models.UserRoles;
+using Rocket.BL.Common.Services;
 using Rocket.BL.Services.UserServices;
 using Swashbuckle.Swagger.Annotations;
 
@@ -12,7 +13,7 @@ namespace Rocket.Web.Controllers.UserRole
     [RoutePrefix("roles")]
     public class RoleController : ApiController
     {
-        private readonly RoleService _roleManager;
+        private readonly IRoleService _roleManager;
 
         public RoleController(RoleService roleManager)
         {
@@ -25,7 +26,7 @@ namespace Rocket.Web.Controllers.UserRole
         [SwaggerResponse(HttpStatusCode.OK)]
         public IHttpActionResult GetAllRoles()
         {
-            var result = _roleManager.GetAllRoles().ToArray();
+            var result = _roleManager.GetAll().ToArray();
             return Ok(result);
         }
 

@@ -10,7 +10,7 @@ namespace Rocket.Web.Controllers.UserRole
     [RoutePrefix("user")]
     public class RoleManagerController : ApiController
     {
-        private readonly UserRoleManager _roleManager;
+        private readonly IUserRoleManager _roleManager;
 
         public RoleManagerController(UserRoleManager roleManager)
         {

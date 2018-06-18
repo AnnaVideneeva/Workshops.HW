@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
+using Rocket.BL.Common.Mappings.PersonalAreaMappings;
 using Rocket.BL.Common.Models.PersonalArea;
 using Rocket.BL.Common.Services.PersonalArea;
 using Rocket.BL.Properties;
@@ -9,12 +11,12 @@ using System.Text.RegularExpressions;
 
 namespace Rocket.BL.Services.PersonalArea
 {
-    public class ChangeEmailManagerService : BaseService, IEmailManager
+    public class EmailManagerService : BaseService, IEmailManager
     {
         private readonly string _pattern = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
 
-        public ChangeEmailManagerService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public EmailManagerService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
@@ -35,9 +37,9 @@ namespace Rocket.BL.Services.PersonalArea
             if (!Regex.IsMatch(email.Name, _pattern, RegexOptions.IgnoreCase))
             {
                 throw new ValidationException(Resources.WrongEmailFormat);
-            }  
+            }
 
-             var emails = new DbEmail() { Name = email.Name, DbUserProfileId = id };
+            var emails = new DbEmail() { Name = email.Name, DbUserProfileId = id };
             unitOfWork.EmailRepository.Insert(emails);
             unitOfWork.SaveChanges();
             return emails.Id;

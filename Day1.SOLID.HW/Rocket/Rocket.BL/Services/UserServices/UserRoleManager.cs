@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using Common.Logging;
 using Microsoft.AspNet.Identity;
+using Rocket.BL.Common.Services;
 using Rocket.DAL.Common.UoW;
 using Rocket.DAL.Identity;
 
 namespace Rocket.BL.Services.UserServices
 {
-    public class UserRoleManager : BaseService
+    public class UserRoleManager : BaseService, IUserRoleManager
     {
         private const string DefaultRoleId = "test"; // todo MP закинуть в хранилище дефолтроль когда будет конкретная база с guid
         private readonly ILog _logger;
@@ -87,7 +88,7 @@ namespace Rocket.BL.Services.UserServices
         /// </summary>
         /// <param name="userId"> Идентификатор пользователя. </param>
         /// <returns>Список ролей</returns>
-        public virtual async Task<IList<string>> GetRoles(string userId)
+        public virtual async Task<IEnumerable<string>> GetRoles(string userId)
         {
             _logger.Trace($"Request GetRoles : user {userId}");
             return await _userManager.GetRolesAsync(userId).ConfigureAwait(false);

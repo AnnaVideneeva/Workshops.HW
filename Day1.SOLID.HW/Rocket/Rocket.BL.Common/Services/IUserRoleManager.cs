@@ -14,14 +14,14 @@ namespace Rocket.BL.Common.Services
         /// <param name="userId"> Идентификатор ползователя. </param>
         /// <param name="roleId"> Идентификатор ролию </param>
         /// <returns> Task </returns>
-        Task<IdentityResult> AddToRole(string userId, string roleId);
+        Task<IdentityResult> AddToRole(string userId, string roleId );
 
         /// <summary>
         /// Получить все роли пользователя по его Id
         /// </summary>
         /// <param name="userId"> Идентификатор ползователя. </param>
         /// <returns>list</returns>
-        IEnumerable<DbRole> GetRoles(string userId);
+        Task<IEnumerable<string>> GetRoles(string userId);
 
         /// <summary>
         /// Проверка что у юзера есть соответствующая роль
@@ -29,7 +29,7 @@ namespace Rocket.BL.Common.Services
         /// <param name="userId"> Идентификатор ползователя. </param>
         /// <param name="roleId"> Идентификатор ролию </param>
         /// <returns>bool</returns>
-        bool IsInRole(string userId, string roleId);
+        Task<bool> IsInRole(string userId, string roleId);
 
         /// <summary>
         /// Удалить роль у юзера
