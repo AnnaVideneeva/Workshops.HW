@@ -19,7 +19,7 @@ namespace Rocket.BL.Services.ReleaseList
 
         public EpisodeFullDto GetEpisodesById(int id)
         {
-            var episode = _unitOfWork.EpisodeRepository
+            var episode = unitOfWork.EpisodeRepository
                 .Get(f => f.Id == id, includeProperties: $"{nameof(EpisodeEntity.Season)}")?.FirstOrDefault();
 
             if (episode == null)
@@ -27,7 +27,7 @@ namespace Rocket.BL.Services.ReleaseList
                 return null;
             }
 
-            episode.Season.TvSeries = _unitOfWork.TvSeriasRepository.GetById(episode.Season.TvSeriesId);
+            episode.Season.TvSeries = unitOfWork.TvSeriasRepository.GetById(episode.Season.TvSeriesId);
             return Mapper.Map<EpisodeFullDto>(episode);
         }
 
@@ -56,9 +56,9 @@ namespace Rocket.BL.Services.ReleaseList
             }
 
             var pageInfo = new PageInfo<EpisodeFullDto>();
-            pageInfo.TotalItemsCount = _unitOfWork.EpisodeRepository.ItemsCount(filter);
+            pageInfo.TotalItemsCount = unitOfWork.EpisodeRepository.ItemsCount(filter);
             pageInfo.TotalPagesCount = (int)Math.Ceiling((double)pageInfo.TotalItemsCount / pageSize);
-            var episodes = _unitOfWork.EpisodeRepository.GetPage(
+            var episodes = unitOfWork.EpisodeRepository.GetPage(
                     pageSize,
                     pageNumber,
                     filter,
@@ -67,7 +67,7 @@ namespace Rocket.BL.Services.ReleaseList
 
             foreach (var entity in episodes)
             {
-                entity.Season.TvSeries = _unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
+                entity.Season.TvSeries = unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
             }
 
             pageInfo.PageItems = Mapper.Map<IEnumerable<EpisodeFullDto>>(episodes);
@@ -77,9 +77,9 @@ namespace Rocket.BL.Services.ReleaseList
         public PageInfo<EpisodeDto> GetScheduleEpisodesPage(int pageSize, int pageNumber)
         {
             var pageInfo = new PageInfo<EpisodeDto>();
-            pageInfo.TotalItemsCount = _unitOfWork.EpisodeRepository.ItemsCount(e => e.ReleaseDateRu > DateTime.Now);
+            pageInfo.TotalItemsCount = unitOfWork.EpisodeRepository.ItemsCount(e => e.ReleaseDateRu > DateTime.Now);
             pageInfo.TotalPagesCount = (int)Math.Ceiling((double)pageInfo.TotalItemsCount / pageSize);
-            var episodes = _unitOfWork.EpisodeRepository.GetPage(
+            var episodes = unitOfWork.EpisodeRepository.GetPage(
                 pageSize,
                 pageNumber,
                 f => f.ReleaseDateRu > DateTime.Now,
@@ -88,7 +88,7 @@ namespace Rocket.BL.Services.ReleaseList
 
             foreach (var entity in episodes)
             {
-                entity.Season.TvSeries = _unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
+                entity.Season.TvSeries = unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
             }
 
             pageInfo.PageItems = Mapper.Map<IEnumerable<EpisodeDto>>(episodes);
@@ -106,13 +106,13 @@ namespace Rocket.BL.Services.ReleaseList
                     f.ReleaseDateRu >= startDate && f.ReleaseDateRu <= endDate;
             }
 
-            var episodes = _unitOfWork.EpisodeRepository.Get(
+            var episodes = unitOfWork.EpisodeRepository.Get(
                 filter,
                 includeProperties: $"{nameof(EpisodeEntity.Season)}");
 
             foreach (var entity in episodes)
             {
-                entity.Season.TvSeries = _unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
+                entity.Season.TvSeries = unitOfWork.TvSeriasRepository.GetById(entity.Season.TvSeriesId);
             }
 
             return Mapper.Map<IEnumerable<EpisodeDto>>(episodes);

@@ -13,11 +13,6 @@ using Rocket.DAL.Identity;
 
 namespace Rocket.BL.Services.UserServices
 {
-    public static class Permissions
-    {
-        public static string Read => "read.news";
-    }
-
     /// <summary>
     /// Добавление/удаление пермишенов у ролей + логирование
     /// </summary>
@@ -33,10 +28,15 @@ namespace Rocket.BL.Services.UserServices
         /// с заданным unit of work
         /// </summary>
         /// <param name="unitOfWork">Экземпляр unit of work</param>
-        /// <param name="userManager"></param>
-        /// <param name="roleManager"></param>
-        public PermissionService(IUnitOfWork unitOfWork,RocketUserManager userManager,
-            RockeRoleManager roleManager, ILog logger): base(unitOfWork)
+        /// <param name="userManager">User manager.</param>
+        /// <param name="roleManager">Role manager.</param>
+        /// <param name="logger">Logger.</param>
+        public PermissionService(
+            IUnitOfWork unitOfWork,
+            RocketUserManager userManager,
+            RockeRoleManager roleManager, 
+            ILog logger)
+            : base(unitOfWork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -66,6 +66,7 @@ namespace Rocket.BL.Services.UserServices
             //_unitOfWork.SaveChanges();
         }
         */
+
         /// <summary>
         /// Удоляет пермишен у роли
         /// </summary>
@@ -86,6 +87,7 @@ namespace Rocket.BL.Services.UserServices
         /// Добавляет пермишен
         /// </summary>
         /// <param name="permission">Пермишен</param>
+        /// <param name="user">User</param>
         public void Insert(Permission permission, string user)
         {
             //var permPermissionId = new Claim("permission", permission.PermissionId.ToString());
@@ -147,7 +149,8 @@ namespace Rocket.BL.Services.UserServices
         /// <summary>
         /// Удаляет пермишен
         /// </summary>
-        /// <param name="id">Идентификатор пермишена</param>
+        /// <param name="permission">Идентификатор пермишена</param>
+        /// <param name="user">User.</param>
         public void Delete(Permission permission, string user)
         {
             var userId = _userManager.FindById(user);
@@ -203,7 +206,7 @@ namespace Rocket.BL.Services.UserServices
         /// <summary>
         /// Возвращает пермишены роли, нужно для UI
         /// </summary>
-        /// <param name="idRole">Идентификатор роли</param>
+        /// <param name="user">Идентификатор роли</param>
         /// <returns>Коллекцию Permission</returns>
         public IEnumerable<Permission> GetPermissionByYser(string user)
         {

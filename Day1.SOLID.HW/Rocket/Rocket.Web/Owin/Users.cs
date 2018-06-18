@@ -17,7 +17,7 @@ namespace Rocket.Web.Owin
                     Password = "password",
                     Claims = new List<Claim>()
                     {
-                        new Claim("shirt_size","XXL")
+                        new Claim("shirt_size", "XXL")
                     }
                 }
             };

@@ -14,12 +14,12 @@ namespace Rocket.BL.Services.ReleaseList
 
         public IEnumerable<GenreDto> GetTvSeriesGenres()
         {
-            return Mapper.Map<IEnumerable<GenreDto>>(_unitOfWork.GenreRepository.Get());
+            return Mapper.Map<IEnumerable<GenreDto>>(unitOfWork.GenreRepository.Get());
         }
 
         public IEnumerable<GenreDto> GetMusicGenres()
         {
-            return Mapper.Map<IEnumerable<GenreDto>>(_unitOfWork.MusicGenreRepository.Get());
+            return Mapper.Map<IEnumerable<GenreDto>>(unitOfWork.MusicGenreRepository.Get());
         }
     }
 }

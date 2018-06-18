@@ -135,6 +135,7 @@
     <Compile Include="Services\ReleaseList\SubscriptionService.cs" />
     <Compile Include="Services\ReleaseList\TvSeriesDetailedInfoService.cs" />
     <Compile Include="Services\UserPaymentService\UserPaymentService.cs" />
+    <Compile Include="Services\UserServices\Permissions.cs" />
     <Compile Include="Services\UserServices\PermissionService.cs" />
     <Compile Include="Services\UserServices\UserRoleManager.cs" />
     <Compile Include="Services\UserServices\RoleService.cs" />

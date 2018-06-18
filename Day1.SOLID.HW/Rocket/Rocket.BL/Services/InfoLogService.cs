@@ -18,12 +18,12 @@ namespace Rocket.BL.Services
         /// <returns> string </returns>
         public string GetLogInfo() // todo MP подумать чтобы передать дату файла вместо =string path=, =int count=
         {
-            const int count = 20; // количество последних записей
+            const int Count = 20; // количество последних записей
 
             var path = HostingEnvironment.MapPath("~/App_Data/Logs/2018-06-08.log");
             var resultString = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path) || count <= 0)
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path) || Count <= 0)
             {
                 return resultString;
             }
@@ -32,17 +32,17 @@ namespace Rocket.BL.Services
             var logRows = new StringBuilder();
 
             // прочитать N байт с файла
-            using (var fStream = new FileInfo(path).Open(FileMode.Open, FileAccess.Read))
+            using (var fileStream = new FileInfo(path).Open(FileMode.Open, FileAccess.Read))
             {
-                if (fStream.Length <= СountBytes)
+                if (fileStream.Length <= СountBytes)
                 {
-                    var readed = fStream.Read(buffer, 0, buffer.Length);
+                    var readed = fileStream.Read(buffer, 0, buffer.Length);
                     logRows.Insert(0, Encoding.UTF8.GetString(buffer, 0, readed));
                 }
                 else
                 {
                     // рассчитываем точку входа в последний буфер с учетом кратности 
-                    var multiply = fStream.Length % СountBytes;
+                    var multiply = fileStream.Length % СountBytes;
                     var position = multiply * СountBytes;
 
                     // количество полных комплит-строк
@@ -50,8 +50,8 @@ namespace Rocket.BL.Services
 
                     do
                     {
-                        fStream.Position = position;
-                        var readed = fStream.Read(buffer, 0, СountBytes);
+                        fileStream.Position = position;
+                        var readed = fileStream.Read(buffer, 0, СountBytes);
                         var readedStr = Encoding.UTF8.GetString(buffer, 0, readed);
 
                         // подсчёт строк
@@ -70,11 +70,11 @@ namespace Rocket.BL.Services
                             position = 0;
                         }
                     }
-                    while (countFullLines < count + 1);
+                    while (countFullLines < Count + 1);
                 }
             }
 
-            return GetResult(logRows, count);
+            return GetResult(logRows, Count);
         }
 
         /// <summary>

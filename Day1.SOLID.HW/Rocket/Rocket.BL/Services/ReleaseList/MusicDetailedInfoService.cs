@@ -39,7 +39,7 @@ namespace Rocket.BL.Services.ReleaseList
             //_unitOfWork.MusicRepository.GetById(id));
 
             var model = Mapper.Map<Music>(
-                _unitOfWork.MusicRepository.Get(
+                unitOfWork.MusicRepository.Get(
                         f => f.Id == id,
                         includeProperties: $"{nameof(Music.Genres)},{nameof(Music.MusicTracks)},{nameof(Music.Musicians)}")
                     ?.FirstOrDefault());
@@ -57,8 +57,8 @@ namespace Rocket.BL.Services.ReleaseList
         public int AddMusic(Music music)
         {
             var dbMusic = Mapper.Map<DbMusic>(music);
-            _unitOfWork.MusicRepository.Insert(dbMusic);
-            _unitOfWork.SaveChanges();
+            unitOfWork.MusicRepository.Insert(dbMusic);
+            unitOfWork.SaveChanges();
             return dbMusic.Id;
         }
 
@@ -70,8 +70,8 @@ namespace Rocket.BL.Services.ReleaseList
         public void UpdateMusic(Music music)
         {
             var dbMusic = Mapper.Map<DbMusic>(music);
-            _unitOfWork.MusicRepository.Update(dbMusic);
-            _unitOfWork.SaveChanges();
+            unitOfWork.MusicRepository.Update(dbMusic);
+            unitOfWork.SaveChanges();
         }
 
         /// <inheritdoc />
@@ -81,8 +81,8 @@ namespace Rocket.BL.Services.ReleaseList
         /// <param name="id">Идентификатор музыкального релиза</param>
         public void DeleteMusic(int id)
         {
-            _unitOfWork.MusicRepository.Delete(id);
-            _unitOfWork.SaveChanges();
+            unitOfWork.MusicRepository.Delete(id);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Rocket.BL.Services.ReleaseList
         /// <returns>bool</returns>
         public bool MusicExists(Expression<Func<Music, bool>> filter)
         {
-            return _unitOfWork.MusicRepository.Get(
+            return unitOfWork.MusicRepository.Get(
                            Mapper.Map<Expression<Func<DbMusic, bool>>>(filter))
                        .FirstOrDefault() != null;
         }
@@ -117,7 +117,7 @@ namespace Rocket.BL.Services.ReleaseList
                     f.ReleaseDate >= startDate && f.ReleaseDate <= endDate;
             }
 
-            var musics = _unitOfWork.MusicRepository.Get(filter);
+            var musics = unitOfWork.MusicRepository.Get(filter);
 
             return Mapper.Map<IEnumerable<Music>>(musics);
         }
@@ -140,10 +140,10 @@ namespace Rocket.BL.Services.ReleaseList
             }
 
             var pageInfo = new MusicPageInfo();
-            pageInfo.TotalItemsCount = _unitOfWork.MusicRepository.ItemsCount(filter);
+            pageInfo.TotalItemsCount = unitOfWork.MusicRepository.ItemsCount(filter);
             pageInfo.TotalPagesCount = (int)Math.Ceiling((double)pageInfo.TotalItemsCount / pageSize);
             pageInfo.PageItems = Mapper.Map<IEnumerable<DbMusic>, IEnumerable<Music>>(
-                _unitOfWork.MusicRepository.GetPage(
+                unitOfWork.MusicRepository.GetPage(
                     pageSize,
                     pageNumber,
                     filter,
@@ -193,10 +193,10 @@ namespace Rocket.BL.Services.ReleaseList
             }
 
             var pageInfo = new MusicPageInfo();
-            pageInfo.TotalItemsCount = _unitOfWork.MusicRepository.ItemsCount(filter);
+            pageInfo.TotalItemsCount = unitOfWork.MusicRepository.ItemsCount(filter);
             pageInfo.TotalPagesCount = (int)Math.Ceiling((double)pageInfo.TotalItemsCount / pageSize);
             pageInfo.PageItems = Mapper.Map<IEnumerable<DbMusic>, IEnumerable<Music>>(
-                _unitOfWork.MusicRepository.GetPage(
+                unitOfWork.MusicRepository.GetPage(
                     pageSize,
                     pageNumber,
                     filter,

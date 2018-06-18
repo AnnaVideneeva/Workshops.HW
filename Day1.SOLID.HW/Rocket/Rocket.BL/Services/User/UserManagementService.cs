@@ -32,13 +32,17 @@ namespace Rocket.BL.Services.User
         /// </summary>
         /// <param name="unitOfWork"> uow </param>
         /// <param name="usermanager"> manager </param>
-        public UserManagementService(IUnitOfWork unitOfWork, RocketUserManager usermanager, IUserAccountLevelService userAccountLevelService)
+        /// <param name="userAccountLevelService"> userAccountLevelService </param>
+        public UserManagementService(
+            IUnitOfWork unitOfWork, 
+            RocketUserManager usermanager, 
+            IUserAccountLevelService userAccountLevelService)
             : base(unitOfWork)
         {
-
             _usermanager = usermanager;
             _userAccountLevelService = userAccountLevelService;
         }
+
         /// <summary>
         /// Возвращает всех пользователей
         /// из хранилища данных.
@@ -88,7 +92,7 @@ namespace Rocket.BL.Services.User
             var dbUser = Mapper.Map<DbUser>(user);
             dbUser.Id = Guid.NewGuid().ToString();
 
-            var DbUserProfile = new DbUserProfile()
+            var dbUserProfile = new DbUserProfile()
             {
                 Email = new Collection<DbEmail>()
                     {
@@ -99,7 +103,7 @@ namespace Rocket.BL.Services.User
                     },
             };
 
-            dbUser.DbUserProfile = DbUserProfile;
+            dbUser.DbUserProfile = dbUserProfile;
 
             dbUser.Email = "emptyEmail";
             dbUser.PhoneNumber = "emptyPhoneNumber";
@@ -161,7 +165,7 @@ namespace Rocket.BL.Services.User
         /// <returns>Возвращает <see langword="true"/>, если пользователь существует в хранилище данных.</returns>
         public bool UserExists(Expression<Func<Common.Models.User.User, bool>> filter)
         {
-            return _unitOfWork.UserRepository.Get(
+            return unitOfWork.UserRepository.Get(
                            Mapper.Map<Expression<Func<DbUser, bool>>>(filter))
                       .FirstOrDefault() != null;
         }

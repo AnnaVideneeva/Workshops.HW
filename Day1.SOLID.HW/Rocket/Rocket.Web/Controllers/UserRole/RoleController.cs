@@ -74,7 +74,6 @@ namespace Rocket.Web.Controllers.UserRole
 
             await _roleManager.Update(roleId, roleName);
             return new StatusCodeResult(HttpStatusCode.NoContent, Request);
-
         }
 
         [HttpDelete]

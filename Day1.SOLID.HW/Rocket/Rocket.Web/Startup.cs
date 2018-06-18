@@ -37,7 +37,6 @@ namespace Rocket.Web
                     .UseInMemoryClients(Clients.Load())
                     .UseInMemoryScopes(Scopes.Load());
 
-
             factory.Register(new Registration<UserManager<DbUser, string>>());
             factory.Register(new Registration<IUserStore<DbUser, string>>(resolver => new UserStore<DbUser>(new RocketContext())));
 

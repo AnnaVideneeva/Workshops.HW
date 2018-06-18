@@ -29,7 +29,7 @@ namespace Rocket.BL.Services.User
         /// <returns>Уровень аккаунта пользователя.</returns>
         public AccountLevel GetUserAccountLevel(int id)
         {
-            var isUserExist = _unitOfWork.UserRepository.Get(u => u.Id == id.ToString())
+            var isUserExist = unitOfWork.UserRepository.Get(u => u.Id == id.ToString())
                 .FirstOrDefault() != null;
 
             // Проверка на наличие пользователя в хранилище.
@@ -39,7 +39,7 @@ namespace Rocket.BL.Services.User
             }
 
             var user = Mapper.Map<Rocket.BL.Common.Models.User.User>(
-                _unitOfWork.UserRepository.GetById(id));
+                unitOfWork.UserRepository.GetById(id));
 
             return user.AccountLevel;
         }
@@ -51,7 +51,7 @@ namespace Rocket.BL.Services.User
         ///// <param name="accountLevel">Задаваемый уровень аккаунта.</param>
         public void SetUserAccountLevel(int id, AccountLevel accountLevel)
         {
-            var isUserExist = _unitOfWork.UserRepository.Get(u => u.Id == id.ToString())
+            var isUserExist = unitOfWork.UserRepository.Get(u => u.Id == id.ToString())
                                   .FirstOrDefault() != null;
 
             // Проверка на наличие пользователя в хранилище.
@@ -61,13 +61,13 @@ namespace Rocket.BL.Services.User
             }
 
             var user = Mapper.Map<Rocket.BL.Common.Models.User.User>(
-                _unitOfWork.UserRepository.GetById(id));
+                unitOfWork.UserRepository.GetById(id));
 
             user.AccountLevel = accountLevel;
 
             var dbUser = Mapper.Map<DbUser>(user);
-            _unitOfWork.UserRepository.Update(dbUser);
-            _unitOfWork.SaveChanges();
+            unitOfWork.UserRepository.Update(dbUser);
+            unitOfWork.SaveChanges();
         }
     }
 }

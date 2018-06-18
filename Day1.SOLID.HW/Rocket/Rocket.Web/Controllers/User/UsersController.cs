@@ -31,7 +31,6 @@ namespace Rocket.Web.Controllers.User
             _rocketUserManagerService = rocketUserManagerService;
             _rolemanager = rolemanager;
             _userManagementService = userNativeManagementService;
-
         }
 
         /// <summary>

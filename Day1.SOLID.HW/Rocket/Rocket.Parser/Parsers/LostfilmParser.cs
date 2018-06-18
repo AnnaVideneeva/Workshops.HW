@@ -1001,10 +1001,11 @@ namespace Rocket.Parser.Parsers
         /// <returns>Сущность персоны.</returns>
         private PersonEntity CreatePersonEntity(IElement castElement)
         {
-            var personEntity = new PersonEntity();
-
-            personEntity.LostfilmPersonalPageUrl =
-                LostfilmHelper.GetBaseUrl() + castElement.GetAttribute(CommonHelper.HrefAttribute);
+            var personEntity = new PersonEntity
+            {
+                LostfilmPersonalPageUrl =
+                LostfilmHelper.GetBaseUrl() + castElement.GetAttribute(CommonHelper.HrefAttribute)
+            };
 
             var aloadThumbElement = castElement
                 .GetElementsByClassName(LostfilmHelper.GetClassAloadThumb())

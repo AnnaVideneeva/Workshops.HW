@@ -20,7 +20,7 @@ namespace Rocket.Web.Controllers.PersonalArea
         }
 
         [HttpGet]
-        [Route()]
+        [Route]
         public IHttpActionResult GetAuthorisedUser()
         {
             var user = _ipersonaldata.GetUserData(User.GetUserId());

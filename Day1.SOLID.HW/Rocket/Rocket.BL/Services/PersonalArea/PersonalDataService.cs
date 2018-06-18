@@ -30,7 +30,7 @@ namespace Rocket.BL.Services.PersonalArea
         /// <returns>Модель авторизованного пользователя.</returns>
         public UserProfile GetUserData(string id)
         {
-            return Mapper.Map<UserProfile>(_unitOfWork.UserAuthorisedRepository.Get(
+            return Mapper.Map<UserProfile>(unitOfWork.UserAuthorisedRepository.Get(
                     f => f.DbUser_Id == id,
                     includeProperties: $"{nameof(DbUser)}")
                     ?.FirstOrDefault());
@@ -49,10 +49,10 @@ namespace Rocket.BL.Services.PersonalArea
                 throw new ValidationException(Resources.UserWrongPassword);
             }
 
-            var user = _unitOfWork.UserRepository.GetById(id) ?? throw new ValidationException(Resources.InvalidUserId);
+            var user = unitOfWork.UserRepository.GetById(id) ?? throw new ValidationException(Resources.InvalidUserId);
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(newPassword);
-            _unitOfWork.UserRepository.Update(user);
-            _unitOfWork.SaveChanges();
+            unitOfWork.UserRepository.Update(user);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>
@@ -64,15 +64,15 @@ namespace Rocket.BL.Services.PersonalArea
         /// <param name="avatar">Аватар пользователя.</param>
         public void ChangePersonalData(string id, string firstName, string lastName, string avatar)
         {
-            var user = _unitOfWork.UserRepository.Get(
+            var user = unitOfWork.UserRepository.Get(
                         f => f.Id == id,
                         includeProperties: $"{nameof(DbUserProfile)}")
                         ?.FirstOrDefault() ?? throw new ValidationException(Resources.InvalidUserId);
             user.FirstName = firstName;
             user.LastName = lastName;
             user.DbUserProfile.Avatar = avatar;
-            _unitOfWork.UserRepository.Update(user);
-            _unitOfWork.SaveChanges();
+            unitOfWork.UserRepository.Update(user);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>

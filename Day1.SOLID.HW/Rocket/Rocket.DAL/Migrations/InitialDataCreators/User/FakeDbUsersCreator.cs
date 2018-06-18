@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Rocket.DAL.Common.DbModels.Identity;
 using Rocket.DAL.Common.DbModels.User;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace Rocket.DAL.Migrations.InitialDataCreators.User
 {
@@ -14,16 +14,15 @@ namespace Rocket.DAL.Migrations.InitialDataCreators.User
         /// <summary>
         /// Создает новый экземпляр сгенерированных данных о пользователях.
         /// </summary>
-        
         public FakeDbUsersCreator()
         {
             var roles = new List<DbUser>()
             {
-                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter456", PasswordHash = "13434"},
-                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter4563", PasswordHash = "234534"},
-                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter3456", PasswordHash = "23452"},
-                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter345643", PasswordHash = "2345"},
-                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter", PasswordHash = "235"}
+                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter456", PasswordHash = "13434" },
+                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter4563", PasswordHash = "234534" },
+                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter3456", PasswordHash = "23452" },
+                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter345643", PasswordHash = "2345" },
+                new DbUser() { FirstName = "Peter", LastName = "Ivanych", UserName = "Peter", PasswordHash = "235" }
         };
         }
 

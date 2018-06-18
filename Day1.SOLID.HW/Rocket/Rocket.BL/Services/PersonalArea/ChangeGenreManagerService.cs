@@ -17,12 +17,12 @@ namespace Rocket.BL.Services.PersonalArea
 
         public IEnumerable GetAllMusicGenres()
         {
-            return AutoMapper.Mapper.Map<IEnumerable<MusicGenre>>(_unitOfWork.MusicGenreRepository.Get());
+            return AutoMapper.Mapper.Map<IEnumerable<MusicGenre>>(unitOfWork.MusicGenreRepository.Get());
         }
 
         public IEnumerable GetAllTvGenres()
         {
-            return AutoMapper.Mapper.Map<IEnumerable<Genre>>(_unitOfWork.GenreRepository.Get());
+            return AutoMapper.Mapper.Map<IEnumerable<Genre>>(unitOfWork.GenreRepository.Get());
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace Rocket.BL.Services.PersonalArea
         /// <param name="genre">Имя жанра для добавления</param>
         public void AddMusicGenre(string id, string genre)
         {
-            var modelUser = _unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
+            var modelUser = unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
                ?? throw new ValidationException(Resources.EmptyModel);
-            if (_unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() == null)
+            if (unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() == null)
             {
                 throw new ValidationException(Resources.GenreWrongName);
             }
@@ -44,9 +44,9 @@ namespace Rocket.BL.Services.PersonalArea
                 throw new ValidationException(Resources.GenreDuplicate);
             }
 
-            modelUser.MusicGenres.Add(_unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
-            _unitOfWork.UserAuthorisedRepository.Update(modelUser);
-            _unitOfWork.SaveChanges();
+            modelUser.MusicGenres.Add(unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
+            unitOfWork.UserAuthorisedRepository.Update(modelUser);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace Rocket.BL.Services.PersonalArea
         /// <param name="genre">Имя жанра для добавления</param>
         public void AddTvGenre(string id, string genre)
         {
-            var modelUser = _unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
+            var modelUser = unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
                 ?? throw new ValidationException(Resources.EmptyModel);
-            if (_unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() == null)
+            if (unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() == null)
             {
                 throw new ValidationException(Resources.GenreWrongName);
             }
@@ -68,9 +68,9 @@ namespace Rocket.BL.Services.PersonalArea
                 throw new ValidationException(Resources.GenreDuplicate);
             }
 
-            modelUser.Genres.Add(_unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
-            _unitOfWork.UserAuthorisedRepository.Update(modelUser);
-            _unitOfWork.SaveChanges();
+            modelUser.Genres.Add(unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
+            unitOfWork.UserAuthorisedRepository.Update(modelUser);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>
@@ -80,19 +80,19 @@ namespace Rocket.BL.Services.PersonalArea
         /// <param name="genre">Имя жанра для удаления</param>
         public void DeleteMusicGenre(string id, string genre)
         {
-            var modelUser = _unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault() 
+            var modelUser = unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault() 
                 ?? throw new ValidationException(Resources.EmptyModel);
             if (modelUser.MusicGenres.Where(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() != null)
             {
-                modelUser.MusicGenres.Remove(_unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
+                modelUser.MusicGenres.Remove(unitOfWork.MusicGenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
             }
             else
             {
                 throw new ValidationException(Resources.GenreWrongName);
             }
 
-            _unitOfWork.UserAuthorisedRepository.Update(modelUser);
-            _unitOfWork.SaveChanges();
+            unitOfWork.UserAuthorisedRepository.Update(modelUser);
+            unitOfWork.SaveChanges();
         }
 
         /// <summary>
@@ -102,19 +102,19 @@ namespace Rocket.BL.Services.PersonalArea
         /// <param name="genre">Имя жанра для удаления</param>
         public void DeleteTvGenre(string id, string genre)
         {
-            var modelUser = _unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
+            var modelUser = unitOfWork.UserAuthorisedRepository.Get(f => f.DbUser_Id == id).FirstOrDefault()
                 ?? throw new ValidationException(Resources.EmptyModel);
             if (modelUser.Genres.Where(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault() != null)
             {
-                modelUser.Genres.Remove(_unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
+                modelUser.Genres.Remove(unitOfWork.GenreRepository.Get(f => f.Name.ToUpper() == genre.ToUpper()).FirstOrDefault());
             }
             else
             {
                 throw new ValidationException(Resources.GenreWrongName);
             }
 
-            _unitOfWork.UserAuthorisedRepository.Update(modelUser);
-            _unitOfWork.SaveChanges();
+            unitOfWork.UserAuthorisedRepository.Update(modelUser);
+            unitOfWork.SaveChanges();
         }
     }
 }

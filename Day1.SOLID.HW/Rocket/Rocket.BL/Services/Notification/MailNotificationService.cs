@@ -103,7 +103,7 @@ namespace Rocket.BL.Services.Notification
 
             try
             {
-                var user = _unitOfWork.UserAuthorisedRepository.Get(
+                var user = unitOfWork.UserAuthorisedRepository.Get(
                 x => x.DbUser_Id == id, null, "DbUser").First();
                 var billing = Mapper.Map<BillingNotification>(user);
                 billing.Sum = sum;
@@ -111,13 +111,13 @@ namespace Rocket.BL.Services.Notification
                 string body;
                 if (type == BillingType.Donate)
                 {
-                    var template = _unitOfWork.EmailTemplateRepository.GetById(
+                    var template = unitOfWork.EmailTemplateRepository.GetById(
                         Convert.ToInt32(Resources.Donate)).Body;
                     body = Engine.Razor.RunCompile(template, Resources.Donate, null, new { Donate = billing });
                 }
                 else
                 {
-                    var template = _unitOfWork.EmailTemplateRepository.GetById(
+                    var template = unitOfWork.EmailTemplateRepository.GetById(
                         Convert.ToInt32(Resources.Premium)).Body;
                     body = Engine.Razor.RunCompile(
                         template,
@@ -183,7 +183,7 @@ namespace Rocket.BL.Services.Notification
                     Sum = sum,
                     Currency = currency
                 };
-                string template = _unitOfWork.EmailTemplateRepository.GetById(
+                string template = unitOfWork.EmailTemplateRepository.GetById(
                     Convert.ToInt32(Resources.Donate)).Body;
                 string body = Engine.Razor.RunCompile(
                     template,
@@ -243,7 +243,7 @@ namespace Rocket.BL.Services.Notification
                     },
                     Url = url
                 };
-                string template = _unitOfWork.EmailTemplateRepository.GetById(
+                string template = unitOfWork.EmailTemplateRepository.GetById(
                     Convert.ToInt32(Resources.Confirmation)).Body;
                 string body = Engine.Razor.RunCompile(
                     template,
@@ -337,7 +337,7 @@ namespace Rocket.BL.Services.Notification
             try
             {
                 var release = Mapper.Map<MusicNotification>(music);
-                string template = _unitOfWork.EmailTemplateRepository
+                string template = unitOfWork.EmailTemplateRepository
                     .GetById(Convert.ToInt32(Resources.Music)).Body;
 
                 int quota = release.Receivers.Count / _transport.Count();
@@ -401,7 +401,7 @@ namespace Rocket.BL.Services.Notification
             try
             {
                 var release = Mapper.Map<EpisodeNotification>(episode);
-                string template = _unitOfWork.EmailTemplateRepository
+                string template = unitOfWork.EmailTemplateRepository
                     .GetById(Convert.ToInt32(Resources.Episode)).Body;
 
                 int quota = release.Receivers.Count / _transport.Count();

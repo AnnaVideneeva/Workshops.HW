@@ -95,24 +95,28 @@ namespace Rocket.Web.Controllers.UserPayments
             if (ipnContext.Verification.Equals("VERIFIED"))
             {
                 var paymentInfo = ipnContext.RequestBody;
-                var payment = new BL.Common.Models.UserPayment();
-                payment.Summ = decimal.Parse(GetFromSpam("mc_gross", paymentInfo).Replace(".", ","));
-                payment.PaymentID = GetFromSpam("payer_id", paymentInfo);
-                payment.Result = GetFromSpam("payment_status", paymentInfo);
-                payment.FirstName = GetFromSpam("first_name", paymentInfo);
-                payment.CustomString = GetFromSpam("custom", paymentInfo);
-                payment.Email = GetFromSpam("payer_email", paymentInfo);
-                payment.LastName = GetFromSpam("last_name", paymentInfo);
-                payment.Currentcy = GetFromSpam("mc_currency", paymentInfo);
-                payment.UserId = GetFromSpam("custom", paymentInfo);
+                var payment = new BL.Common.Models.UserPayment
+                {
+                    Summ = decimal.Parse(GetFromSpam("mc_gross", paymentInfo).Replace(".", ",")),
+                    PaymentID = GetFromSpam("payer_id", paymentInfo),
+                    Result = GetFromSpam("payment_status", paymentInfo),
+                    FirstName = GetFromSpam("first_name", paymentInfo),
+                    CustomString = GetFromSpam("custom", paymentInfo),
+                    Email = GetFromSpam("payer_email", paymentInfo),
+                    LastName = GetFromSpam("last_name", paymentInfo),
+                    Currentcy = GetFromSpam("mc_currency", paymentInfo),
+                    UserId = GetFromSpam("custom", paymentInfo)
+                };
 
                 _userPaymentService.AddUserPayment(payment);
 
                 if ((payment.Result == "Completed") && (payment.Summ == 3))
                 {
-                    var accountLevel = new AccountLevel();
-                    accountLevel.Id = 2;
-                    accountLevel.Name = "Премиум";
+                    var accountLevel = new AccountLevel
+                    {
+                        Id = 2,
+                        Name = "Премиум"
+                    };
                     _userAccountLevelService.SetUserAccountLevel(int.Parse(payment.UserId), accountLevel);
                 }
             }
@@ -125,13 +129,14 @@ namespace Rocket.Web.Controllers.UserPayments
                 //Log error
             }
         }
+
         private class IPNContext
         {
             public HttpRequestMessage IPNRequest { get; set; }
 
             public string RequestBody { get; set; }
 
-            public string Verification { get; set; } = String.Empty;
+            public string Verification { get; set; } = string.Empty;
         }
     }
 }

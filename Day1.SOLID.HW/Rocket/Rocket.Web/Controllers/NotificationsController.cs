@@ -28,7 +28,6 @@ namespace Rocket.Web.Controllers
             try
             {
                 _pushNotificationsHelper.SendPushNotificationsOfRelease(notifications);
-
             }
             catch (Exception e)
             {

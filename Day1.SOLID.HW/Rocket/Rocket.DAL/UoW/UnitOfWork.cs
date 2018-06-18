@@ -62,7 +62,6 @@ namespace Rocket.DAL.UoW
         /// <param name="dbUserBillingMessageRepository">Репозиторий сообщений о платежах пользователя</param>
         /// <param name="userPaymentRepository">Репозиторий платежей пользователя</param>
         /// <param name="subscribableRepository">Репозиторий ресурсов для подписки</param>
-        
         public UnitOfWork(
             RocketContext rocketContext,
             IBaseRepository<DbMusic> musicRepository,
@@ -356,7 +355,10 @@ namespace Rocket.DAL.UoW
         /// <param name="disposing">Указывает вызван ли этот метод из метода Dispose() или из финализатора.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (_disposed) return;
+            if (_disposed)
+            {
+                return;
+            }
 
             if (disposing)
             {

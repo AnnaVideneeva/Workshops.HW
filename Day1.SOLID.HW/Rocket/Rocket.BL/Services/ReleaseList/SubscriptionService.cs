@@ -13,28 +13,28 @@ namespace Rocket.BL.Services.ReleaseList
 
         public void Subscribe(string userId, int id)
         {
-            var user = _unitOfWork.UserRepository.Get(f => f.Id == userId, includeProperties: $"{nameof(DbUser.Subscriptions)}")
+            var user = unitOfWork.UserRepository.Get(f => f.Id == userId, includeProperties: $"{nameof(DbUser.Subscriptions)}")
                 .FirstOrDefault();
-            var subscription = _unitOfWork.SubscribableRepository.GetById(id);
+            var subscription = unitOfWork.SubscribableRepository.GetById(id);
             if (user != null && subscription != null && !user.Subscriptions.Contains(subscription))
             {
                 user.Subscriptions.Add(subscription);
             }
 
-            _unitOfWork.SaveChanges();
+            unitOfWork.SaveChanges();
         }
 
         public void Unsubscribe(string userId, int id)
         {
-            var user = _unitOfWork.UserRepository.Get(f => f.Id == userId, includeProperties: $"{nameof(DbUser.Subscriptions)}")
+            var user = unitOfWork.UserRepository.Get(f => f.Id == userId, includeProperties: $"{nameof(DbUser.Subscriptions)}")
                 .FirstOrDefault();
-            var subscription = _unitOfWork.SubscribableRepository.GetById(id);
+            var subscription = unitOfWork.SubscribableRepository.GetById(id);
             if (user != null && subscription != null && user.Subscriptions.Contains(subscription))
             {
                 user.Subscriptions.Remove(subscription);
             }
 
-            _unitOfWork.SaveChanges();
+            unitOfWork.SaveChanges();
         }
     }
 }

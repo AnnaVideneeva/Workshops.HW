@@ -5,7 +5,7 @@ namespace Rocket.BL.Services
 {
     public abstract class BaseService : IDisposable
     {
-        protected IUnitOfWork _unitOfWork;
+        protected IUnitOfWork unitOfWork;
         private bool _disposedValue;
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace Rocket.BL.Services
         /// <param name="unitOfWork">Экземпляр unit of work</param>
         protected BaseService(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
         }
 
         ~BaseService()
@@ -43,8 +43,8 @@ namespace Rocket.BL.Services
                     GC.SuppressFinalize(this);
                 }
 
-                _unitOfWork?.Dispose();
-                _unitOfWork = null;
+                unitOfWork?.Dispose();
+                unitOfWork = null;
                 _disposedValue = true;
             }
         }
